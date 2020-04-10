@@ -9,9 +9,7 @@ const username = document.querySelector('input');
 const textResult = document.querySelector('.text-result');
 const modelResult = document.querySelector('#model-result');
 const modalWindow = document.querySelectorAll('.modal-window')[0];
-
-let name = '';
-
+const modalOverlay = document.querySelectorAll('.modal-overlay')[2];
 
 let generationRandomInsultMan = function(persname) {
 
@@ -21,12 +19,12 @@ let generationRandomInsultMan = function(persname) {
 
     let pickrandomword = function(words) {
         return words[Math.floor(Math.random() * words.length)];
-    }
+    };
 
     let randomInsult = `${persname}, ти бля ${pickrandomword(randomBody)} ${pickrandomword(randomLook)} ${pickrandomword(randomAnimal)}`;
 
     return textResult.textContent = randomInsult;
-}
+};
 
 let generationRandomInsultWoman = function(persname) {
 
@@ -36,26 +34,29 @@ let generationRandomInsultWoman = function(persname) {
 
     let pickrandomword = function(words) {
         return words[Math.floor(Math.random() * words.length)];
-    }
+    };
 
     let randomInsult = `${persname}, сонечко, ти ${pickrandomword(randomBody)} ${pickrandomword(randomLook)} ${pickrandomword(randomAnimal)}`;
 
     return textResult.textContent = randomInsult;
-}
+};
 
 function remove() {
-
+    username.value = '';
+    textResult.textContent = '';
     modelResult.classList.add('none');
-    modelResult.classList.remove('active');
-    modelResult.textContent = '';
-
+    modelResult.classList.remove('active');  
 }
+
 
 //Main
 mainBtn.addEventListener('click', function() {
 
+    let name = '';
+    
     modal1.classList.remove('none');
     modal1.classList.add('active');
+
 
     modalWindow.addEventListener('click', function(e) {
 
@@ -69,19 +70,26 @@ mainBtn.addEventListener('click', function() {
             human.classList.remove('none');
 
             //Запитуєм імя
-            username.addEventListener('change', function(e) {
-                name += this.value;
+            username.addEventListener('change', function() {
+                name = this.value;
                 
                 generationRandomInsultMan(name);
 
+                console.log(name);
+                
                 //Видаляє відкно і включає інше
                 human.classList.add('none');
                 human.classList.remove('active');
                 modelResult.classList.add('active');
                 modelResult.classList.remove('none');
 
-                setTimeout(remove, 7000);
+                modelResult.addEventListener('click', function(e) {
+                    if (e.target == modalOverlay) {
+                        remove();
+                    } 
+                });
             });
+            
             
             
         //Варіант 2
@@ -95,7 +103,7 @@ mainBtn.addEventListener('click', function() {
 
             //Запитуєм імя
             username.addEventListener('change', function() {
-                name += this.value;
+                name = this.value;
 
                 generationRandomInsultWoman(name);
             
@@ -105,13 +113,16 @@ mainBtn.addEventListener('click', function() {
                 modelResult.classList.add('active');
                 modelResult.classList.remove('none');
 
-                setTimeout(remove, 7000);
+                modelResult.addEventListener('click', function(e) {
+                    if (e.target == modalOverlay) {
+                        remove();
+                    } 
+                });
             });
 
-            
         }
         
     });
-});
 
+});
 
