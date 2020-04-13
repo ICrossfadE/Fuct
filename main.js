@@ -56,7 +56,7 @@ function removeEnd(modal, modalWindow) {
     modal.classList.remove('active'); 
     setTimeout(() => {
         modal.classList.add('none');
-       }, 500);
+       }, 300);
     
     modalWindow.classList.remove('active-anim');
     modalWindow.classList.add('noneW');
@@ -69,10 +69,10 @@ function addModal(modal, modalWindow) {
     modal.classList.remove('none');
     modal.classList.add('active');
     
-    modalWindow.classList.remove('none');
+    modalWindow.classList.remove('noneW');
     modalWindow.classList.add('active-anim');
 
-    $('.active-anim').animate({'width':'90%'}, 600);
+    $('.active-anim').animate({'width':'90%'}, 500);
 }
 
 function removeModal(modal, modalWindow) {
@@ -81,7 +81,7 @@ function removeModal(modal, modalWindow) {
     modal.classList.remove('active');
     setTimeout(() => {
         modal.classList.add('none');
-       }, 500);
+       }, 400);
 
     modalWindow.classList.remove('active-anim');
     modalWindow.classList.add('noneW');
@@ -104,10 +104,7 @@ mainBtn.addEventListener('click', function () {
             if(e.target == buttonM) {
 
                 removeModal(start, modalWindowFirst);
-                
-                // addModal(human, modalWindowSecond);
-
-                setTimeout(addModal(human, modalWindowSecond), 600);
+                setTimeout(addModal(human, modalWindowSecond), 500);
 
                 userName.addEventListener('change', function() {
 
@@ -116,8 +113,6 @@ mainBtn.addEventListener('click', function () {
                     removeModal(human, modalWindowSecond);
 
                     addModal(result, modalWindowThird);
-                    console.log(name);
-
 
                     result.addEventListener('click', function(e) {
 
