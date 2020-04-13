@@ -8,7 +8,6 @@ const modalWindowFirst = document.querySelectorAll('.modal-window')[0];
 const modalWindowSecond = document.querySelectorAll('.modal-window')[1];
 const modalWindowThird = document.querySelectorAll('.modal-window')[2];
 const modalOverlay = document.querySelectorAll('.modal-overlay')[2];
-let none = document.querySelector('.none');
 
 //Input / Result
 const start = document.querySelector('#start');
@@ -49,34 +48,45 @@ function generationRandomInsultWoman(persname) {
     return textResult.textContent = randomInsult;
 }
 
-function removeEnd() {
+function removeEnd(modal, modalWindow) {
+
     userName.value = '';
     textResult.textContent = '';
-    result.classList.add('none');
-    result.classList.remove('active');  
+
+    modal.classList.remove('active'); 
+    setTimeout(() => {
+        modal.classList.add('none');
+       }, 500);
+    
+    modalWindow.classList.remove('active-anim');
+    modalWindow.classList.add('noneW');
+
+    $('.noneW').animate({'width':'0%'}, 400);
 }
 
 function addModal(modal, modalWindow) {
     
     modal.classList.remove('none');
     modal.classList.add('active');
-
+    
     modalWindow.classList.remove('none');
-    modalWindow.classList.add('active');
+    modalWindow.classList.add('active-anim');
 
+    $('.active-anim').animate({'width':'90%'}, 600);
 }
 
 function removeModal(modal, modalWindow) {
     
+    
     modal.classList.remove('active');
-    modal.classList.add('none');
+    setTimeout(() => {
+        modal.classList.add('none');
+       }, 500);
 
-    modalWindow.classList.remove('active');
+    modalWindow.classList.remove('active-anim');
     modalWindow.classList.add('noneW');
 
-    none.DOMContentLoaded = function() {
-        this.style.width = '0%';
-    };
+    $('.noneW').animate({'width':'0%'}, 400);
 }
 
 //Work-proсess
@@ -89,12 +99,15 @@ mainBtn.addEventListener('click', function () {
     
         modalWindowFirst.addEventListener('click', function(e) {
 
-    
+            
             //V-2
             if(e.target == buttonM) {
 
                 removeModal(start, modalWindowFirst);
-                addModal(human, modalWindowSecond);
+                
+                // addModal(human, modalWindowSecond);
+
+                setTimeout(addModal(human, modalWindowSecond), 600);
 
                 userName.addEventListener('change', function() {
 
@@ -109,11 +122,10 @@ mainBtn.addEventListener('click', function () {
                     result.addEventListener('click', function(e) {
 
                         if(e.target == modalOverlay) {
-                            removeEnd();
+                            removeEnd(result, modalWindowThird);
                         }
                     });
                 });
-                console.log(1);
                 
             //V-2    
             } else if (e.target == buttonW) {
@@ -134,15 +146,13 @@ mainBtn.addEventListener('click', function () {
                     result.addEventListener('click', function(e) {
 
                         if(e.target == modalOverlay) {
-                            removeEnd();
+                            removeEnd(result, modalWindowThird);
                         }
                     });
                 });
-                console.log(2);
 
             } else {
 
-            alert('ERROR');
         }
     });
 

@@ -58,7 +58,7 @@ p {
     margin: 10px;
     height: 100px;
     border-radius: 20px;
-    width: 90%;
+    width: 0%; /*90*/
     font-size: 40px;
     background-color: #0b0b0b;
     overflow: hidden;
@@ -139,18 +139,10 @@ p {
     display: flex;
 }
 
-.modal-show {
+.active-anim {
     display: flex;
 }
 
 .none {
     display: none;
-}
-
-.noneW {
-    display: none;
-}
-
-@keyframes del {
-
 }
