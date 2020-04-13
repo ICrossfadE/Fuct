@@ -1,17 +1,25 @@
-
-// const modals = document.querySelector('.modals');
+//botton
 const buttonM = document.querySelector('.btn-m');
 const buttonW = document.querySelector('.btn-w');
-const modal1 = document.querySelector('#modal-1');
 const mainBtn = document.querySelector('.main-btn');
-const human = document.querySelector('#username');
-const username = document.querySelector('input');
-const textResult = document.querySelector('.text-result');
-const modelResult = document.querySelector('#model-result');
-const modalWindow = document.querySelectorAll('.modal-window')[0];
-const modalOverlay = document.querySelectorAll('.modal-overlay')[2];
 
-let generationRandomInsultMan = function(persname) {
+//Modals
+const modalWindowFirst = document.querySelectorAll('.modal-window')[0];
+const modalWindowSecond = document.querySelectorAll('.modal-window')[1];
+const modalWindowThird = document.querySelectorAll('.modal-window')[2];
+const modalOverlay = document.querySelectorAll('.modal-overlay')[2];
+let none = document.querySelector('.none');
+
+//Input / Result
+const start = document.querySelector('#start');
+const human = document.querySelector('#human');
+const result = document.querySelector('#model-result');
+const userName = document.querySelector('input');
+const textResult = document.querySelector('.text-result');
+
+
+//Functions
+function generationRandomInsultMan(persname) {
 
     const randomLook = ['Хвіст','Окорок','Ніс','Волос','Хуй'];
     const randomBody = ['Гнилий','Вонючий','Кончений','Дрочений'];
@@ -24,9 +32,9 @@ let generationRandomInsultMan = function(persname) {
     let randomInsult = `${persname}, ти бля ${pickrandomword(randomBody)} ${pickrandomword(randomLook)} ${pickrandomword(randomAnimal)}`;
 
     return textResult.textContent = randomInsult;
-};
+}
 
-let generationRandomInsultWoman = function(persname) {
+function generationRandomInsultWoman(persname) {
 
     const randomLook = ['Хвіст','Окорок','Ніс','Нога','Хуй'];
     const randomBody = ['Гнилий','Вонючий','Кончена','Дрочена'];
@@ -39,90 +47,103 @@ let generationRandomInsultWoman = function(persname) {
     let randomInsult = `${persname}, сонечко, ти ${pickrandomword(randomBody)} ${pickrandomword(randomLook)} ${pickrandomword(randomAnimal)}`;
 
     return textResult.textContent = randomInsult;
-};
-
-function remove() {
-    username.value = '';
-    textResult.textContent = '';
-    modelResult.classList.add('none');
-    modelResult.classList.remove('active');  
 }
 
+function removeEnd() {
+    userName.value = '';
+    textResult.textContent = '';
+    result.classList.add('none');
+    result.classList.remove('active');  
+}
 
-//Main
-mainBtn.addEventListener('click', function() {
-
-    let name = '';
+function addModal(modal, modalWindow) {
     
-    modal1.classList.remove('none');
-    modal1.classList.add('active');
+    modal.classList.remove('none');
+    modal.classList.add('active');
+
+    modalWindow.classList.remove('none');
+    modalWindow.classList.add('active');
+
+}
+
+function removeModal(modal, modalWindow) {
+    
+    modal.classList.remove('active');
+    modal.classList.add('none');
+
+    modalWindow.classList.remove('active');
+    modalWindow.classList.add('noneW');
+
+    none.DOMContentLoaded = function() {
+        this.style.width = '0%';
+    };
+}
+
+//Work-proсess
+
+mainBtn.addEventListener('click', function () {
+
+    let name ='';
+
+    addModal(start, modalWindowFirst);
+    
+        modalWindowFirst.addEventListener('click', function(e) {
+
+    
+            //V-2
+            if(e.target == buttonM) {
+
+                removeModal(start, modalWindowFirst);
+                addModal(human, modalWindowSecond);
+
+                userName.addEventListener('change', function() {
+
+                    name = this.value;
+                    generationRandomInsultMan(name);
+                    removeModal(human, modalWindowSecond);
+
+                    addModal(result, modalWindowThird);
+                    console.log(name);
 
 
-    modalWindow.addEventListener('click', function(e) {
+                    result.addEventListener('click', function(e) {
 
-        //Варіант 1
-        if(e.target == buttonM) {
-
-            //Видаляє відкно і включає інше
-            modal1.classList.add('none');
-            modal1.classList.remove('active');
-            human.classList.add('active');
-            human.classList.remove('none');
-
-            //Запитуєм імя
-            username.addEventListener('change', function() {
-                name = this.value;
-                
-                generationRandomInsultMan(name);
-
-                console.log(name);
-                
-                //Видаляє відкно і включає інше
-                human.classList.add('none');
-                human.classList.remove('active');
-                modelResult.classList.add('active');
-                modelResult.classList.remove('none');
-
-                modelResult.addEventListener('click', function(e) {
-                    if (e.target == modalOverlay) {
-                        remove();
-                    } 
+                        if(e.target == modalOverlay) {
+                            removeEnd();
+                        }
+                    });
                 });
-            });
-            
-            
-            
-        //Варіант 2
-        } else if(e.target == buttonW) {
+                console.log(1);
+                
+            //V-2    
+            } else if (e.target == buttonW) {
+                
+                removeModal(start, modalWindowFirst);
+                addModal(human, modalWindowSecond);
 
-            //Видаляє відкно і включає інше
-            modal1.classList.add('none');
-            modal1.classList.remove('active');
-            human.classList.add('active');
-            human.classList.remove('none');
+                userName.addEventListener('change', function() {
 
-            //Запитуєм імя
-            username.addEventListener('change', function() {
-                name = this.value;
+                    name = this.value;
+                    generationRandomInsultWoman(name);
+                    removeModal(human, modalWindowSecond);
 
-                generationRandomInsultWoman(name);
-            
-                //Видаляє відкно і включає інше
-                human.classList.add('none');
-                human.classList.remove('active');
-                modelResult.classList.add('active');
-                modelResult.classList.remove('none');
+                    addModal(result, modalWindowThird);
+                    console.log(name);
 
-                modelResult.addEventListener('click', function(e) {
-                    if (e.target == modalOverlay) {
-                        remove();
-                    } 
+
+                    result.addEventListener('click', function(e) {
+
+                        if(e.target == modalOverlay) {
+                            removeEnd();
+                        }
+                    });
                 });
-            });
+                console.log(2);
 
+            } else {
+
+            alert('ERROR');
         }
-        
     });
 
 });
-
