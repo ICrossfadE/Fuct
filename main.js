@@ -16,6 +16,11 @@ const result = document.querySelector('#model-result');
 const userName = document.querySelector('input');
 const textResult = document.querySelector('.text-result');
 
+//Audio
+const bleepM = new Audio();
+bleepM.src = '/audioBeeb/beep-07.mp3';
+const bleepW = new Audio();
+bleepW.src = '/audioBeeb/beep-08.mp3';
 
 //Functions
 function generationRandomInsultMan(persname) {
@@ -56,8 +61,8 @@ function removeEnd(modal, modalWindow) {
     modal.classList.remove('active'); 
     setTimeout(() => {
         modal.classList.add('none');
-       }, 300);
-    
+        }, 400);
+
     modalWindow.classList.remove('active-anim');
     modalWindow.classList.add('noneW');
 
@@ -81,7 +86,7 @@ function removeModal(modal, modalWindow) {
     modal.classList.remove('active');
     setTimeout(() => {
         modal.classList.add('none');
-       }, 400);
+        }, 400);
 
     modalWindow.classList.remove('active-anim');
     modalWindow.classList.add('noneW');
@@ -96,6 +101,19 @@ mainBtn.addEventListener('click', function () {
     let name ='';
 
     addModal(start, modalWindowFirst);
+
+        modalWindowFirst.addEventListener('mouseover', function(e) {
+
+            if(e.target == buttonM) {
+
+                bleepM.play();
+
+            } else if (e.target ==buttonW) {
+
+                bleepW.play();
+            }
+            
+        });
     
         modalWindowFirst.addEventListener('click', function(e) {
 
@@ -104,7 +122,7 @@ mainBtn.addEventListener('click', function () {
             if(e.target == buttonM) {
 
                 removeModal(start, modalWindowFirst);
-                setTimeout(addModal(human, modalWindowSecond), 500);
+                addModal(human, modalWindowSecond);
 
                 userName.addEventListener('change', function() {
 
@@ -135,8 +153,6 @@ mainBtn.addEventListener('click', function () {
                     removeModal(human, modalWindowSecond);
 
                     addModal(result, modalWindowThird);
-                    console.log(name);
-
 
                     result.addEventListener('click', function(e) {
 

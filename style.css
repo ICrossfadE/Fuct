@@ -24,8 +24,8 @@ p {
     align-items: center;
 }
 
-.container-start {
-    height: 586px;
+.container-header {
+    height: 602px;
     display: flex;
     flex-direction: column;
     justify-content:  space-around;
@@ -65,7 +65,7 @@ p {
 }
 
 .main-btn {
-    margin: 0;
+    margin-top: 200px;
     padding: 28px 128px;
     border: none;
     border-radius: 76px;
