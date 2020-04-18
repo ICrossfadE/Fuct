@@ -41,7 +41,7 @@ function generationRandomInsultMan(persname) {
 function generationRandomInsultWoman(persname) {
 
     const randomLook = ['Хвіст','Окорок','Ніс','Нога','Хуй'];
-    const randomBody = ['Гнилий','Вонючий','Кончена','Дрочена'];
+    const randomBody = ['Гнилий','Вонючий','Кончена','Дрочений'];
     const randomAnimal = ['Козла','Коня','Чорта','Пса','Бомжа','Олега'];
 
     let pickrandomword = function(words) {
