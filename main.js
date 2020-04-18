@@ -64,9 +64,9 @@ function removeEnd(modal, modalWindow) {
         }, 400);
 
     modalWindow.classList.remove('active-anim');
-    modalWindow.classList.add('noneW');
+    modalWindow.classList.add('none-modal');
 
-    $('.noneW').animate({'width':'0%'}, 400);
+    // $('.noneW').animate({'width':'0%'}, 400);
 }
 
 function addModal(modal, modalWindow) {
@@ -74,10 +74,10 @@ function addModal(modal, modalWindow) {
     modal.classList.remove('none');
     modal.classList.add('active');
     
-    modalWindow.classList.remove('noneW');
+    modalWindow.classList.remove('none-modal');
     modalWindow.classList.add('active-anim');
 
-    $('.active-anim').animate({'width':'90%'}, 500);
+    // $('.active-anim').animate({'width':'90%'}, 500);
 }
 
 function removeModal(modal, modalWindow) {
@@ -89,9 +89,9 @@ function removeModal(modal, modalWindow) {
         }, 400);
 
     modalWindow.classList.remove('active-anim');
-    modalWindow.classList.add('noneW');
+    modalWindow.classList.add('none-modal');
 
-    $('.noneW').animate({'width':'0%'}, 400);
+    // $('.noneW').animate({'width':'0%'}, 400);
 }
 
 //Work-proсess
@@ -136,7 +136,7 @@ mainBtn.addEventListener('click', function () {
 
                         if(e.target == modalOverlay) {
                             removeEnd(result, modalWindowThird);
-                        }
+                        }       
                     });
                 });
                 
@@ -159,7 +159,7 @@ mainBtn.addEventListener('click', function () {
                         if(e.target == modalOverlay) {
                             removeEnd(result, modalWindowThird);
                         }
-                    });
+                    });              
                 });
 
             } else {
